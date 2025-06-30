@@ -20,7 +20,7 @@ html {
   scroll-behavior: smooth;
   scroll-padding-top: 75px; /* Offset for fixed header */
   scrollbar-width: thin; /* For Firefox */
-  scrollbar-color: var(--color-secondary) var(--color-light-gray); /* For Firefox */
+  scrollbar-color: var(--color-accent-dark) var(--color-light-gray); /* For Firefox */
 }
 
 body {
