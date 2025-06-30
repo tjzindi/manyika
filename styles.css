@@ -88,7 +88,7 @@ body {
   left: 0;
   width: 100%;
   height: 100%;
-  background: linear-gradient(rgba(var(--color-primary-rgb), 0.7), rgba(var(--color-primary-rgb), 0.7));
+  background: linear-gradient(rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0.5));
   z-index: -1;
 }
 
@@ -131,13 +131,15 @@ body {
 }
 
 .hero-content h1 {
+  color: var(--color-primary);
   font-family: var(--font-headings);
-  font-size: 2.8rem;
+  font-size: 3.0rem;
   font-weight: 700;
   margin-bottom: 20px;
 }
 
 .hero-content p {
+  color: var(--color-text-dark);
   font-size: 1.3rem;
   margin-bottom: 30px;
 }
@@ -681,7 +683,7 @@ label.required::after {
 
 /* --- Footer --- */
 .site-footer {
-  background: var(--color-primary);
+  background: linear-gradient(to right, var(--color-accent), var(--color-accent-dark));
   color: #e0e0e0;
   padding: 40px 20px;
 }
@@ -814,7 +816,7 @@ label.required::after {
   top: 0;
   left: 0;
   width: 100%;
-  background: var(--color-primary); /* Solid by default */
+  background: rgba(255, 255, 255, 0.7); /* Transparent white */
   padding: 10px 0;
   z-index: 1000;
   /* Add backdrop-filter to transition for the glass effect */
@@ -822,11 +824,12 @@ label.required::after {
 }
 
 .main-header.scrolled {
-  /* Enhanced Glassmorphism effect */
-  background: rgba(var(--color-primary-rgb), 0.65); /* More transparent */
+  /* Glassmorphism effect */
+  background: rgba(255, 255, 255, 0.65); /* More transparent */
   -webkit-backdrop-filter: blur(10px); /* For Safari */
   backdrop-filter: blur(10px); /* Increased blur */
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2), inset 0 -1px 0 rgba(255, 255, 255, 0.1);
+  /* Adjust these values as needed */
 }
 
 .header-container {
@@ -855,7 +858,7 @@ label.required::after {
 }
 
 .nav-links a {
-  color: var(--color-white);
+  color: var(--color-primary); 
   text-decoration: none;
   font-weight: 600;
   padding: 5px 0;
@@ -870,24 +873,31 @@ label.required::after {
   left: 0;
   width: 0;
   height: 2px;
-  background: var(--color-accent);
+  background: var(--color-accent-dark);
   transition: width 0.3s ease;
 }
 
 .nav-links a:hover {
-  color: var(--color-accent);
+  color: var(--color-accent-dark);
 }
 
 .nav-links a.active {
-  color: var(--color-accent);
+  color: var(--color-accent-dark);
 }
 
 .nav-links a.active::after {
   width: 100%;
 }
-
+.nav-links a:hover {
+  color: var(--color-text-light);
+}
 .nav-links a:hover::after {
   width: 100%;
+}
+
+/* Change link color on scroll */
+.main-header.scrolled .nav-links a {
+  color: var(--color-primary);
 }
 
 /* --- Navigation Link Animation (Desktop) --- */
@@ -921,15 +931,30 @@ label.required::after {
   z-index: 1001;
 }
 
+.nav-toggle .close-icon {
+  display: none; /* Initially hidden */
+  font-size: 2rem;
+  color: var(--color-accent-dark);
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.nav-toggle.open .close-icon {
+  display: block; /* Show 'X' when menu is open */
+  color: var(--color-white);
+}
+
 .hamburger,
 .hamburger::before,
 .hamburger::after {
-  content: '';
+  content: "";
   display: block;
   position: relative;
   width: 25px;
   height: 3px;
-  background: var(--color-white);
+  background: var(--color-accent-dark);
   border-radius: 3px;
   transition: all 0.3s ease-in-out;
 }
@@ -1055,7 +1080,7 @@ label.required::after {
     width: 70%;
     max-width: 300px;
     height: 100vh;
-    background: var(--color-primary);
+    background: var(--color-accent);
     flex-direction: column;
     justify-content: center;
     align-items: center;
@@ -1067,12 +1092,23 @@ label.required::after {
     right: 0; /* Slide in */
   }
 
+  .nav-links.nav-active a {
+    color: var(--color-white);
+  }
+
   /* Hamburger animation to 'X' */
   .nav-toggle.open .hamburger {
     background: transparent;
   }
   .nav-toggle.open .hamburger::before { transform: rotate(45deg); }
   .nav-toggle.open .hamburger::after { transform: rotate(-45deg); }
+}
+
+.nav-toggle.open .close-icon {
+  color: var(--color-white);
+  position: absolute;
+  top: 20px;
+  right: 20px;
 }
 
 @keyframes navLinkFade {
