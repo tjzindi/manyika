@@ -1089,7 +1089,7 @@ label.required::after {
   }
 
   .nav-links.nav-active {
-    right: 0; /* Slide in */
+    left: 0; /* Slide in */
   }
 
   .nav-links.nav-active a {
