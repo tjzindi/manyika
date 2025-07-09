@@ -356,9 +356,15 @@ h3 {
   backdrop-filter: blur(5px); 
 }
 
-#partners {
-  /* Adds extra space below the section, before the contact section */
-  margin-bottom: 30px;
+.partners-grid {
+  list-style: none; /* Removes bullet points */
+  padding: 0;
+  margin: 40px 0 0 0;
+  display: grid;
+  /* Creates a responsive grid that wraps automatically */
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 30px;
+  justify-content: center;
 }
 
 .partner-card {
@@ -371,7 +377,9 @@ h3 {
   height: 100%;
   transition: transform 0.8s ease;
   transform-style: preserve-3d;
-  min-height: 250px;
+  /* Set a fixed height to prevent shifting during the flip animation.
+     This height must be large enough for the content on both sides. */
+  min-height: 320px;
 }
 
 .partner-card:hover .flip-inner {
@@ -422,6 +430,12 @@ h3 {
   margin: 0;
 }
 
+.partner-description {
+  font-size: 0.95rem;
+  color: var(--color-text-light);
+  margin: 0.5rem 0 0 0;
+}
+
 .enter-button {
   background-color: var(--color-primary); /* fixed */
   color: var(--color-white); /* fixed */
@@ -437,15 +451,8 @@ h3 {
   background-color: var(--color-accent); /* fixed */
 }
 
-/* Responsive: Stack partner cards vertically on small screens */
-@media (max-width: 600px) {
-  .partner-card {
-    margin-bottom: 30px;
-  }
-  .flip-inner {
-    min-height: 180px;
-  }
-}
+/* No specific mobile styles needed for the card anymore, 
+   the grid and fixed height handle responsiveness. */
 
 /* Contact Section Background */
 #contact {
