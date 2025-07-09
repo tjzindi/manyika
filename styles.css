@@ -19,8 +19,11 @@
 html {
   scroll-behavior: smooth;
   scroll-padding-top: 75px; /* Offset for fixed header */
-  scrollbar-width: thin; /* For Firefox */
-  scrollbar-color: var(--color-accent-dark) var(--color-light-gray); /* For Firefox */
+  /* scrollbar-width is only supported in Firefox; for Chrome/Safari, see ::-webkit-scrollbar below */
+  /* scrollbar-width: thin; For Firefox (progressive enhancement, safe to ignore in unsupported browsers) */
+  @supports (scrollbar-color: auto) {
+    scrollbar-color: var(--color-accent-dark) var(--color-light-gray); /* For Firefox */
+  }
 }
 
 body {
@@ -353,11 +356,105 @@ h3 {
   backdrop-filter: blur(5px); 
 }
 
+#partners {
+  /* Adds extra space below the section, before the contact section */
+  margin-bottom: 30px;
+}
+
+.partner-card {
+  perspective: 1000px;
+}
+
+.flip-inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  transition: transform 0.8s ease;
+  transform-style: preserve-3d;
+  min-height: 250px;
+}
+
+.partner-card:hover .flip-inner {
+  transform: rotateY(180deg);
+}
+
+/* FRONT + BACK sides */
+.flip-front,
+.flip-back {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  border: 1px solid var(--color-border); /* fixed */
+  border-radius: 8px;
+  padding: 1.5rem;
+  background: var(--color-white); /* fixed */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  backface-visibility: hidden;
+  gap: 1rem;
+}
+
+/* Front side */
+.flip-front {
+  z-index: 2;
+}
+
+/* Back side */
+.flip-back {
+  transform: rotateY(180deg);
+}
+
+/* Shared content styles */
+.partner-logo,
+.hover-logo {
+  width: 80px;
+  height: auto;
+}
+
+.partner-name,
+.hover-name {
+  font-size: 1.4rem;
+  font-weight: bold;
+  color: var(--color-primary); /* fixed */
+  margin: 0;
+}
+
+.enter-button {
+  background-color: var(--color-primary); /* fixed */
+  color: var(--color-white); /* fixed */
+  text-decoration: none;
+  padding: 0.6rem 1.2rem;
+  border-radius: 4px;
+  font-weight: bold;
+  transition: background 0.3s ease;
+  margin-top: 1rem;
+}
+
+.enter-button:hover {
+  background-color: var(--color-accent); /* fixed */
+}
+
+/* Responsive: Stack partner cards vertically on small screens */
+@media (max-width: 600px) {
+  .partner-card {
+    margin-bottom: 30px;
+  }
+  .flip-inner {
+    min-height: 180px;
+  }
+}
+
 /* Contact Section Background */
 #contact {
   position: relative;
   isolation: isolate;
-  background: rgba(var(--color-primary-rgb), 0.8);
+  /* Creates a gradient from a light top to the darker primary overlay */
+  background: linear-gradient(to bottom, 
+    rgba(255, 255, 255, 0.2) 0%, 
+    rgba(var(--color-primary-rgb), 0.8) 40%);
   background-size: cover;
   background-position: center;
   color: var(--color-white);
